@@ -3,10 +3,57 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="/../css/bootstrap.css">
+        <link rel="stylesheet" href="/../vendors/linericon/style.css">
+        <link rel="stylesheet" href="/../css/font-awesome.min.css">
+        <link rel="stylesheet" href="/../vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="/../vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="/../css/style.css">
+        <link rel="stylesheet" href="/../css/responsive.css">
+        {% endblock %}
     </head>
     <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Gestion Des Cours</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Enseignants</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Etudiants</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">Cours</a>
+      </li>
+    </ul>
+  </div>
+</nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/stellar.js"></script>
+	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
+	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="js/jquery.ajaxchimp.min.js"></script>
+	<script src="js/mail-script.js"></script>
+	<script src="js/countdown.js"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="js/gmaps.min.js"></script>
+	<script src="js/theme.js"></script>
 </html>
