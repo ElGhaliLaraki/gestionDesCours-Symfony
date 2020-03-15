@@ -13,7 +13,6 @@ class NiveauType extends AbstractType
     {
         $builder
             ->add('Nom')
-            ->add('Enseignant')
         ;
     }
 

@@ -45,6 +45,10 @@ class Niveau
         $this->Enseignant = new ArrayCollection();
     }
 
+    public function __toString(){
+        return $this->Nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

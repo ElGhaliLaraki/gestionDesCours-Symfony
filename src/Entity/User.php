@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already used")
  */
 class User implements UserInterface
 {
@@ -30,8 +33,22 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * Assert\Length(min="8",minMessage="Votre mot de passe doit etre au minimum 8 caractére")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut;
+
+    /**
+   * @Assert\NotBlank()
+   * @Assert\Length(max=4096)
+   * Assert\Length(min="8",minMessage="Votre mot de passe doit etre au minimum 8 caractére")
+   * @Assert\EqualTo(propertyPath="password", message=" Vous n'avez pas tapé le meme Mot de passe")
+   */
+  private $confirm_password;
 
     public function getId(): ?int
     {
@@ -97,6 +114,21 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
+    public function getConfirmPassword(): string
+    {
+        return (string) $this->confirm_password;
+    }
+
+    public function setConfirmPassword(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
     public function getSalt()
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
@@ -109,5 +141,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
     }
 }
