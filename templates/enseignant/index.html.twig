@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Enseignant index{% endblock %}
+{% block title %}Enseignants{% endblock %}
 
 {% block body %}
+<br><br>
+<div class="container">
     <h1>Enseignants</h1>
 
     <table class="table">
@@ -12,7 +14,6 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Email</th>
-                <th>Departement</th>
                 <th>Tel</th>
                 <th>Matricule</th>
                 <th>actions</th>
@@ -25,7 +26,6 @@
                 <td>{{ enseignant.Nom }}</td>
                 <td>{{ enseignant.Prenom }}</td>
                 <td>{{ enseignant.Email }}</td>
-                <td>{{ enseignant.Departement }}</td>
                 <td>{{ enseignant.Tel }}</td>
                 <td>{{ enseignant.Matricule }}</td>
                 <td>
@@ -42,4 +42,5 @@
     </table>
 
     <a href="{{ path('enseignant_new') }}">Create new</a>
+    </div>
 {% endblock %}

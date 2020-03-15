@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,11 +34,6 @@ class Enseignant
     private $Email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Departement;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $Tel;
@@ -45,6 +42,16 @@ class Enseignant
      * @ORM\Column(type="string", length=255)
      */
     private $Matricule;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Niveau", mappedBy="Enseignant")
+     */
+    private $NiveauEns;
+
+    public function __construct()
+    {
+        $this->NiveauEns = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +126,34 @@ class Enseignant
     public function setMatricule(string $Matricule): self
     {
         $this->Matricule = $Matricule;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Niveau[]
+     */
+    public function getNiveauEns(): Collection
+    {
+        return $this->NiveauEns;
+    }
+
+    public function addNiveauEn(Niveau $niveauEn): self
+    {
+        if (!$this->NiveauEns->contains($niveauEn)) {
+            $this->NiveauEns[] = $niveauEn;
+            $niveauEn->addEnseignant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNiveauEn(Niveau $niveauEn): self
+    {
+        if ($this->NiveauEns->contains($niveauEn)) {
+            $this->NiveauEns->removeElement($niveauEn);
+            $niveauEn->removeEnseignant($this);
+        }
 
         return $this;
     }

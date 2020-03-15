@@ -39,17 +39,13 @@ class Etudiant
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Niveau;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Departement;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $CNE;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="Etudiant")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $NiveauEtu;
 
     public function getId(): ?int
     {
@@ -104,30 +100,6 @@ class Etudiant
         return $this;
     }
 
-    public function getNiveau(): ?string
-    {
-        return $this->Niveau;
-    }
-
-    public function setNiveau(string $Niveau): self
-    {
-        $this->Niveau = $Niveau;
-
-        return $this;
-    }
-
-    public function getDepartement(): ?string
-    {
-        return $this->Departement;
-    }
-
-    public function setDepartement(string $Departement): self
-    {
-        $this->Departement = $Departement;
-
-        return $this;
-    }
-
     public function getCNE(): ?string
     {
         return $this->CNE;
@@ -136,6 +108,18 @@ class Etudiant
     public function setCNE(string $CNE): self
     {
         $this->CNE = $CNE;
+
+        return $this;
+    }
+
+    public function getNiveauEtu(): ?Niveau
+    {
+        return $this->NiveauEtu;
+    }
+
+    public function setNiveauEtu(?Niveau $NiveauEtu): self
+    {
+        $this->NiveauEtu = $NiveauEtu;
 
         return $this;
     }

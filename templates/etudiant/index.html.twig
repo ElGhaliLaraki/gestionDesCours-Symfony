@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Etudiant index{% endblock %}
+{% block title %}Etudiants{% endblock %}
 
 {% block body %}
-    <h1>Etudiant index</h1>
+<br><br>
+<div class="container">
+    <h1>Etudiants</h1>
 
     <table class="table">
         <thead>
@@ -13,8 +15,6 @@
                 <th>Prenom</th>
                 <th>Email</th>
                 <th>Tel</th>
-                <th>Niveau</th>
-                <th>Departement</th>
                 <th>CNE</th>
                 <th>actions</th>
             </tr>
@@ -27,8 +27,6 @@
                 <td>{{ etudiant.Prenom }}</td>
                 <td>{{ etudiant.Email }}</td>
                 <td>{{ etudiant.Tel }}</td>
-                <td>{{ etudiant.Niveau }}</td>
-                <td>{{ etudiant.Departement }}</td>
                 <td>{{ etudiant.CNE }}</td>
                 <td>
                     <a href="{{ path('etudiant_show', {'id': etudiant.id}) }}">show</a>
@@ -44,4 +42,5 @@
     </table>
 
     <a href="{{ path('etudiant_new') }}">Create new</a>
+    </div>
 {% endblock %}

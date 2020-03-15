@@ -31,6 +31,12 @@ class Cours
      */
     private $brochureFileName;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="Cours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $niveau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class Cours
     public function setBrochureFileName(string $brochureFileName): self
     {
         $this->brochureFileName = $brochureFileName;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?Niveau
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?Niveau $niveau): self
+    {
+        $this->niveau = $niveau;
 
         return $this;
     }
