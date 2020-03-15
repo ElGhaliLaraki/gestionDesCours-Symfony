@@ -22,14 +22,14 @@ class Cours
     private $Nom;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $Numero;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $Date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $brochureFileName;
 
     public function getId(): ?int
     {
@@ -60,14 +60,14 @@ class Cours
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getBrochureFileName(): ?string
     {
-        return $this->Numero;
+        return $this->brochureFileName;
     }
 
-    public function setNumero(int $Numero): self
+    public function setBrochureFileName(string $brochureFileName): self
     {
-        $this->Numero = $Numero;
+        $this->brochureFileName = $brochureFileName;
 
         return $this;
     }

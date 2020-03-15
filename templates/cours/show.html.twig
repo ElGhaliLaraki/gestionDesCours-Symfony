@@ -8,7 +8,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Numero</th>
                 <td>{{ cour.id }}</td>
             </tr>
             <tr>
@@ -16,13 +16,13 @@
                 <td>{{ cour.Nom }}</td>
             </tr>
             <tr>
-                <th>Numero</th>
-                <td>{{ cour.Numero }}</td>
-            </tr>
-            <tr>
                 <th>Date</th>
                 <td>{{ cour.Date ? cour.Date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>PDF</th>
+                <td><a href="{{ asset('uploads/brochures/' ~ cour.brochureFileName) }}">{{ cour.Nom }}(PDF)</a></td>
+            </tr>    
         </tbody>
     </table>
 

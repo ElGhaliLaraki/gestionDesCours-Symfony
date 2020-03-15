@@ -1,27 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cours index{% endblock %}
+{% block title %}Cours{% endblock %}
 
 {% block body %}
-    <h1>Cours index</h1>
+<br><br>
+<div class="container">
+    <h1>Cours</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
                 <th>Numero</th>
-                <th>Date</th>
+                <th>Nom</th>
+                <th>Date de dépôt</th>
+                <th>PDF</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for cour in cours %}
             <tr>
-                <td>{{ cour.id }}</td>
+                <td>{{ cour.Id }}</td>
                 <td>{{ cour.Nom }}</td>
-                <td>{{ cour.Numero }}</td>
                 <td>{{ cour.Date ? cour.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td><a href="{{ asset('uploads/brochures/' ~ cour.brochureFileName) }}">{{ cour.Nom }}(PDF)</a>
+                </td>
                 <td>
                     <a href="{{ path('cours_show', {'id': cour.id}) }}">show</a>
                     <a href="{{ path('cours_edit', {'id': cour.id}) }}">edit</a>
@@ -36,4 +39,5 @@
     </table>
 
     <a href="{{ path('cours_new') }}">Create new</a>
+    </div>
 {% endblock %}
