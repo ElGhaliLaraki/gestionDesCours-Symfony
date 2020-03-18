@@ -48,9 +48,15 @@ class Enseignant
      */
     private $NiveauEns;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Cours", mappedBy="Enseignantcrs")
+     */
+    private $Cours;
+
     public function __construct()
     {
         $this->NiveauEns = new ArrayCollection();
+        $this->Cours = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +159,37 @@ class Enseignant
         if ($this->NiveauEns->contains($niveauEn)) {
             $this->NiveauEns->removeElement($niveauEn);
             $niveauEn->removeEnseignant($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cours[]
+     */
+    public function getCours(): Collection
+    {
+        return $this->Cours;
+    }
+
+    public function addCour(Cours $cour): self
+    {
+        if (!$this->Cours->contains($cour)) {
+            $this->Cours[] = $cour;
+            $cour->setEnseignantcrs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCour(Cours $cour): self
+    {
+        if ($this->Cours->contains($cour)) {
+            $this->Cours->removeElement($cour);
+            // set the owning side to null (unless already changed)
+            if ($cour->getEnseignantcrs() === $this) {
+                $cour->setEnseignantcrs(null);
+            }
         }
 
         return $this;

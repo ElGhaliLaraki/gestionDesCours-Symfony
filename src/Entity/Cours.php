@@ -37,6 +37,12 @@ class Cours
      */
     private $niveau;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Enseignant", inversedBy="Cours")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Enseignantcrs;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +92,18 @@ class Cours
     public function setNiveau(?Niveau $niveau): self
     {
         $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getEnseignantcrs(): ?Enseignant
+    {
+        return $this->Enseignantcrs;
+    }
+
+    public function setEnseignantcrs(?Enseignant $Enseignantcrs): self
+    {
+        $this->Enseignantcrs = $Enseignantcrs;
 
         return $this;
     }

@@ -39,7 +39,7 @@ class EtudiantController extends AbstractController
             $entityManager->persist($etudiant);
             $entityManager->flush();
 
-            return $this->redirectToRoute('etudiant_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('etudiant/new.html.twig', [
