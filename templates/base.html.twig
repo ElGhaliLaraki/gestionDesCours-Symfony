@@ -70,10 +70,19 @@
   <li class="nav-item">
 		<a href="#" class="nav-link " >BONJOUR {{app.user.username}} !</a>
   </li>
+  <li class="nav-item"><a class="nav-link" href="{{path('profil', {'email': app.user.email} )}}">Profil</a>
 	<li class="nav-item"><a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a></li> 
 	  
 </ul>
+<ul class="nav navbar-nav menu_nav ml-auto">
+   {% if app.user.image == null %}
+      <img  class="image--cover rounded-circle" src="/../img/user.png" height="80" width="80">
+    {% else %}
+      <img  class="image--cover rounded-circle" src="/../img/{{app.user.image}}" height="80" width="80">
+    {% endif %}
+  </ul>
 {% endif %}
+
   </div>
 </nav>
         {% block body %}{% endblock %}

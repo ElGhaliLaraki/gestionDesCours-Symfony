@@ -29,7 +29,7 @@ class Etudiant
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Email;
+    private $email;
 
     /**
      * @ORM\Column(type="integer")
@@ -46,6 +46,11 @@ class Etudiant
      * @ORM\JoinColumn(nullable=false)
      */
     private $NiveauEtu;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -78,12 +83,12 @@ class Etudiant
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $email): self
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
@@ -120,6 +125,18 @@ class Etudiant
     public function setNiveauEtu(?Niveau $NiveauEtu): self
     {
         $this->NiveauEtu = $NiveauEtu;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

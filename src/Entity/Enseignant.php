@@ -31,7 +31,7 @@ class Enseignant
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Email;
+    private $email;
 
     /**
      * @ORM\Column(type="integer")
@@ -52,6 +52,11 @@ class Enseignant
      * @ORM\OneToMany(targetEntity="App\Entity\Cours", mappedBy="Enseignantcrs")
      */
     private $Cours;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
 
     public function __construct()
     {
@@ -90,12 +95,12 @@ class Enseignant
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $email): self
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
@@ -191,6 +196,18 @@ class Enseignant
                 $cour->setEnseignantcrs(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

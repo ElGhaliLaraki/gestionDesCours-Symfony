@@ -50,6 +50,11 @@ class User implements UserInterface
    */
   private $confirm_password;
 
+  /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +156,18 @@ class User implements UserInterface
     public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
