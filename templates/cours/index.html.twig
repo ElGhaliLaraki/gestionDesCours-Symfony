@@ -13,6 +13,7 @@
                 <th>Numero</th>
                 <th>Nom</th>
                 <th>Date de dépôt</th>
+                <th>Niveau</th>
                 <th>PDF</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ cour.Id }}</td>
                 <td>{{ cour.Nom }}</td>
                 <td>{{ cour.Date ? cour.Date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ cour.niveau }}</td>
                 <td><a href="{{ asset('uploads/brochures/' ~ cour.brochureFileName) }}">{{ cour.Nom }}(PDF)</a>
                 </td>
                 <td>
@@ -37,7 +39,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('cours_new') }}">Create new</a>
     </div>
 {% endblock %}

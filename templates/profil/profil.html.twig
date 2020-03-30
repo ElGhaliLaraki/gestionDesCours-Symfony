@@ -8,13 +8,37 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello ! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/gestionDesCours/src/Controller/ProfilController.php'|file_link(0) }}">src/Controller/ProfilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/gestionDesCours/templates/profil/index.html.twig'|file_link(0) }}">templates/profil/profil.html.twig</a></code></li>
-    </ul>
-</div>
+<div class="col "></div>
+    <div class="col-lg-3 col-centered">
+        <div class="main_title">
+				<h2>Photo de Profil</h2>
+				<p>Modifiez votre photo de profil tant que vous voulez</p>
+		<ul></ul>	
+{% if app.user.image == null %}
+      <img  class="image--cover" src="/../img/user.png" style="width: 250px;">
+    {% else %}
+      <img  class="image--cover" src="/../img/{{app.user.image}}"style="width: 250px;" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+    {% endif %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <button class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+    <a style="border-radius: 10px; padding : 5px;" class="btn btn-danger" href="{{ path('DeletePDP', {'email':app.user.email}) }}">
+    <i class="fa fa-trash" style="font-size:20px;"></i>
+    </a>
+    {{ form_end(form) }}
+    </div>
+    <div class="main_title">
+    <ul></ul>
+				<h2> Mes Cours </h2>
+				<p>Découvrez vos cours</p>
+	<ul></ul>
+    		
+    {% if app.user.statut == 0 %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('ListeCours_Etudiants', {'email':app.user.email}) }}">Cours</a>                
+    {% else %}
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('ListeCours_Enseignants', {'email':app.user.email}) }}">Cours</a>
+    <a style="border-radius: 10px; padding : 5px; margin-bottom : 10px;" class="btn btn-info" href="{{ path('cours_new', {'email':app.user.email}) }}">Ajouter un Cours</a>             
+    {% endif %}
+    </div>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de Cours{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+        <div class="main_title">
+			<h2>Liste des Cours</h2>
+			<p>Ensemble de Cours créés par l'enseignant</p>
+		</div>
+
+   <div class="row">
+			{% for cour in lista %}
+				<div class="col-lg-6">
+					<div class="single_event">
+						<div class="row align-items-center">
+							<div class="col-lg-6 col-md-6">
+								<div class="content_wrapper">
+									<div class="team_name">
+                                        <h4>{{ cour.Nom }}</h4>
+										<p>
+											{{ cour.Date ? cour.Date|date('Y-m-d') : '' }}
+										</p>
+										<p>
+										<a href="{{ asset('uploads/brochures/' ~ cour.brochureFileName) }}">{{ cour.Nom }}(PDF)</a>
+										</p>
+       	                            </div>	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+                {% else %}
+            <tr>
+                <td colspan="4">Cet enseignant n'a aucun cours</td>
+            </tr>
+			{% endfor %}
+	</div>
+</div>
+    {% endblock %}

@@ -16,6 +16,7 @@ class CoursType extends AbstractType
         $builder
             ->add('Nom')
             ->add('Date')
+            ->add('niveau')
             ->add('brochureFileName', FileType::class, [
                 'label' => 'Upload your Doc ',
 

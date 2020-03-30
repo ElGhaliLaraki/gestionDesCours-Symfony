@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Entity\Niveau;
 use App\Form\CoursType;
+use App\Entity\Etudiant;
+use App\Entity\Enseignant;
 use App\Repository\CoursRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/cours")
@@ -25,12 +28,54 @@ class CoursController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/ListeCours_Enseignants", name="ListeCours_Enseignants", methods={"GET"})
+     */
+    public function ListeCours_Enseignants(Request $request, CoursRepository $coursRepository): Response
+    {
+
+        $repo = $this->getDoctrine()->getRepository(Enseignant::class);
+        $email=$request->query->get('email');
+        $enseignant = $repo->findOneByEmail($email);
+        $lista = $enseignant->getCours();
+
+        
+        return $this->render('cours/ListeCours_Enseignants.html.twig', [
+            'cours' => $coursRepository->findAll(),
+            'lista' => $lista,
+        ]);
+    }
+
+    /**
+     * @Route("/ListeCours_Etudiants", name="ListeCours_Etudiants", methods={"GET"})
+     */
+    public function ListeCours_Etudiants(Request $request, CoursRepository $coursRepository): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Etudiant::class);
+        $email=$request->query->get('email');
+        $etudiant = $repo->findOneByEmail($email);
+
+        $niveau = $etudiant->getNiveauEtu();
+
+        $liste = $niveau->getCours();
+
+
+        return $this->render('cours/ListeCours_Etudiants.html.twig', [
+            'cours' => $coursRepository->findAll(),
+            'liste' => $liste,
+        ]);
+    }
+
     /**
      * @Route("/new", name="cours_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $cour = new Cours();
+        $repo = $this->getDoctrine()->getRepository(Enseignant::class);
+        $email=$request->query->get('email');
+        $enseignant = $repo->findOneByEmail($email);
+        $cour->setEnseignantcrs($enseignant);
         $form = $this->createForm(CoursType::class, $cour);
         $form->handleRequest($request);
 
@@ -65,7 +110,8 @@ class CoursController extends AbstractController
             $entityManager->persist($cour);
             $entityManager->flush();
 
-            return $this->redirectToRoute('cours_index');
+            return $this->redirectToRoute('cours_index', [
+                'email' => $email]);
         }
 
         return $this->render('cours/new.html.twig', [

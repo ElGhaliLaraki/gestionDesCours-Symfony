@@ -89,4 +89,25 @@ class ProfilController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/DeletePDP", name="DeletePDP" , methods={"GET","POST"})
+     */
+    public function DeletePDP(Request $request)
+    {
+        $email=$request->query->get('email');
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $user = $repo->findOneByEmail($email);
+
+        $user->setImage(NULL);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        
+
+        return $this->redirectToRoute('profil', [
+            'email' => $user->getEmail()
+            ]);
+    }
 }

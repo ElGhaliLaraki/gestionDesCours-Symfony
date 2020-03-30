@@ -20,6 +20,10 @@
                 <td>{{ cour.Date ? cour.Date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
+                <th>Niveau</th>
+                <td>{{ cour.niveau }}</td>
+            </tr>
+            <tr>
                 <th>PDF</th>
                 <td><a href="{{ asset('uploads/brochures/' ~ cour.brochureFileName) }}">{{ cour.Nom }}(PDF)</a></td>
             </tr>    
