@@ -28,7 +28,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles;
+    public function __construct()
+    {
+        $this->isActive = true;
+		$this->roles = ['ROLE_USER'];
+    }
 
     /**
      * @var string The hashed password
@@ -87,18 +92,24 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return (array)$this->roles;
+         
     }
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
-
-        return $this;
+        if (!in_array('ROLE_USER', $roles))
+		{
+			$roles[] = 'ROLE_USER';
+		}
+		foreach ($roles as $role)
+		{
+			if(substr($role, 0, 5) !== 'ROLE_') {
+				throw new InvalidArgumentException("Chaque rôle doit commencer par 'ROLE_'");
+			}
+		}
+		$this->roles = $roles;
+		return $this;
     }
 
     /**
